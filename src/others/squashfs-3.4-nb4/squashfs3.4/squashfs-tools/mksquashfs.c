@@ -31,6 +31,7 @@
 #include <stdio.h>
 #include <sys/time.h>
 #include <sys/sysmacros.h>
+#include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <errno.h>
@@ -41,7 +42,6 @@
 #include <signal.h>
 #include <setjmp.h>
 #include <sys/ioctl.h>
-#include <sys/sysmacros.h>
 #include <sys/mman.h>
 #include <pthread.h>
 #include <math.h>
@@ -2704,7 +2704,7 @@ struct inode_info *lookup_inode(struct stat *buf)
 }
 
 
-inline void add_dir_entry(char *name, char *pathname, struct dir_info *sub_dir, struct inode_info *inode_info, void *data, struct dir_info *dir)
+static inline void add_dir_entry(char *name, char *pathname, struct dir_info *sub_dir, struct inode_info *inode_info, void *data, struct dir_info *dir)
 {
 	if((dir->count % DIR_ENTRIES) == 0)
 		if((dir->list = realloc(dir->list, (dir->count + DIR_ENTRIES) * sizeof(struct dir_ent *))) == NULL)
